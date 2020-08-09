@@ -3,32 +3,52 @@ import React from 'react'
 import whatsappIcon from '../../assets/images/icons/whatsapp.svg'
 
 import './styles.css'
+import api from '../../services/api'
 
-function TeacherItem() {
+
+export interface Teacher {
+        id: number;
+        avatar: string,
+        bio: string,
+        cost: number;
+        name: string;
+        subject: string;
+        whatsapp: number;
+}
+interface TeacherItemProps {
+    teacher: Teacher;
+}
+
+const TeacherItem: React.FunctionComponent<TeacherItemProps> = ({teacher}) => {
+
+    function createNewConnection(){
+        api.post('connections',{
+            user_id: teacher.id,
+        });
+    }
     return (
         <article className="teacher-item">
             <header>
-                <img src="https://pbs.twimg.com/profile_images/1240701477460598784/wwQN5aH__400x400.jpg" alt="Vinicius Scavoni" />
+                <img src={teacher.avatar} alt={teacher.name} />
                 <div>
-                    <strong>Vinicius Scavoni</strong>
-                    <span>Sarcasmo</span>
+                    <strong>{teacher.name}</strong>
+                    <span>{teacher.subject}</span>
                 </div>
             </header>
 
             <p>
-                Esse é o tal jogo que é melhor que o god of war 4 de usuário para ter uma ideia de como fazer um orçamento para limpar o nome da empresa para que eu possa fazer um novo anúncio
+                {teacher.bio}    
             </p>
 
             <footer>
                 <p>
                     Preço/hora
-                <strong>20,00R$</strong>
+                    <strong>{teacher.cost} R$</strong>
                 </p>
-                <button type="button">
+                <a onClick={createNewConnection} href={`https://wa.me/${teacher.whatsapp}`}>
                     <img src={whatsappIcon} alt="Whatsapp" />
-                Entrar em contato
-
-            </button>
+                    Entrar em contato
+                 </a>
             </footer>
         </article>
     );
