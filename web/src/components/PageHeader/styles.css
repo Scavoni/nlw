@@ -31,7 +31,7 @@
     width: 90%;
     margin: 0 auto;
     position: relative;
-    margin: 3.2rem auto;
+    margin: 4.2rem auto;
 }
 
 .page-header .header-content strong {
@@ -41,12 +41,18 @@
     
 }
 
+.page-header .header-content p {
+    max-width: 30rem;
+    font-size: 1.6rem;
+    line-height: 2.6rem;
+    color: var(--color-text-in-primary);
+    margin-top: 3rem;
+}
+
 @media (min-width: 700px){
     .page-header {
         height: 340px;
     }
-
-    
 
     .page-header .top-bar-container {
         max-width: 1100px;
